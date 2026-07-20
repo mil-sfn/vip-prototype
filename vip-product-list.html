@@ -209,73 +209,56 @@
           <!-- ▶ VIP우대·찜 -->
           <div id="vip-vipjjim">
 
-            <!-- 섹션 빠른 이동 (sticky) -->
-            <div class="flex gap-1.5 px-2 pt-2 pb-1 sticky top-0 z-20 bg-[#F4F3FC]">
-              <button onclick="scrollToVipSection()" class="flex-1 text-[10px] font-bold text-orange-600 bg-orange-50 border border-orange-200 rounded-lg py-1.5 flex items-center justify-center gap-0.5 active:bg-orange-100 transition-colors">
-                🏆 VIP 우대상품
-              </button>
-              <button onclick="scrollToJjimSection()" class="flex-1 text-[10px] font-bold text-gray-600 bg-gray-50 border border-gray-200 rounded-lg py-1.5 flex items-center justify-center gap-0.5 active:bg-gray-100 transition-colors">
-                🔖 찜한 상품
-              </button>
+            <!-- 필터 칩 (sticky) -->
+            <div class="flex gap-1.5 px-2 pt-2 pb-1.5 sticky top-0 z-20 bg-[#F4F3FC]">
+              <button id="flt-all"  onclick="filterList('all')"  class="text-[10px] font-bold rounded-full px-3 py-1 transition-colors bg-[#3B1FA5] text-white">전체 6</button>
+              <button id="flt-vip"  onclick="filterList('vip')"  class="text-[10px] font-bold rounded-full px-3 py-1 transition-colors bg-white text-gray-500 border border-gray-200">🏆 VIP 우대 2</button>
+              <button id="flt-jjim" onclick="filterList('jjim')" class="text-[10px] font-bold rounded-full px-3 py-1 transition-colors bg-white text-gray-500 border border-gray-200">🔖 찜 4</button>
             </div>
 
-            <!-- ① VIP 우대상품 -->
-            <div id="vip-section" class="mx-2 mt-2 rounded-xl border border-orange-200">
-              <div class="bg-orange-50 border-b border-orange-100 rounded-t-xl px-2.5 py-1.5 flex items-center">
-                <span class="text-[11px] font-black text-gray-900">🏆 VIP 우대상품</span>
-                <span class="text-orange-500 font-bold text-[9px] ml-1" id="vip-count-label">· 2개</span>
-              </div>
-              <div class="p-1.5 bg-orange-50 rounded-b-xl">
-                <div class="grid grid-cols-2 gap-1.5" id="vip-grid">
-                  <div class="vip-card">
-                    <div class="relative bg-white rounded-lg h-12 flex items-center justify-center text-xl mb-1.5">
-                      <input type="checkbox" class="absolute top-1 left-1 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] rounded z-10">🧀
-                    </div>
-                    <div class="text-[8px] leading-tight text-gray-700 mb-1.5">모짜렐라 피자치즈 2.5kg</div>
+            <!-- 통합 상품 그리드 -->
+            <div class="px-2 pt-1 pb-4">
+              <div class="grid grid-cols-2 gap-1.5" id="unified-grid">
+
+                <!-- VIP 카드 1 -->
+                <div class="rounded-xl overflow-hidden border border-orange-200 bg-orange-50" data-type="vip">
+                  <div class="relative bg-white h-[64px] flex items-center justify-center text-2xl">
+                    <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
+                    🧀
+                  </div>
+                  <div class="p-2">
+                    <div class="text-[8px] text-gray-700 leading-tight mb-1">모짜렐라 피자치즈 2.5kg</div>
                     <div class="flex items-center gap-1 flex-wrap">
-                      <span class="bg-orange-500 text-white text-[7px] px-1 py-0.5 rounded font-black">VIP</span>
+                      <span class="bg-orange-500 text-white text-[7px] px-1 py-0.5 rounded font-black leading-none">VIP</span>
                       <span class="text-red-500 text-[9px] font-black">12%</span>
                       <span class="text-[10px] font-black text-orange-700">86,000원</span>
                     </div>
                     <div class="text-[8px] text-gray-400 line-through mt-0.5">98,000원</div>
                   </div>
-                  <div class="vip-card">
-                    <div class="relative bg-white rounded-lg h-12 flex items-center justify-center text-xl mb-1.5">
-                      <input type="checkbox" class="absolute top-1 left-1 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] rounded z-10">🥚
-                    </div>
-                    <div class="text-[8px] leading-tight text-gray-700 mb-1.5">계란 특란 5판 (세척)</div>
+                </div>
+
+                <!-- VIP 카드 2 -->
+                <div class="rounded-xl overflow-hidden border border-orange-200 bg-orange-50" data-type="vip">
+                  <div class="relative bg-white h-[64px] flex items-center justify-center text-2xl">
+                    <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
+                    🥚
+                  </div>
+                  <div class="p-2">
+                    <div class="text-[8px] text-gray-700 leading-tight mb-1">계란 특란 5판 (세척)</div>
                     <div class="flex items-center gap-1 flex-wrap">
-                      <span class="bg-orange-500 text-white text-[7px] px-1 py-0.5 rounded font-black">VIP</span>
+                      <span class="bg-orange-500 text-white text-[7px] px-1 py-0.5 rounded font-black leading-none">VIP</span>
                       <span class="text-red-500 text-[9px] font-black">15%</span>
                       <span class="text-[10px] font-black text-orange-700">44,000원</span>
                     </div>
                     <div class="text-[8px] text-gray-400 line-through mt-0.5">52,000원</div>
                   </div>
                 </div>
-                <!-- 전체보기 버튼 -->
-                <div id="vip-extra-grid" class="grid grid-cols-2 gap-1.5 mt-1.5 hidden"></div>
-                <button id="vip-expand-btn" onclick="toggleVipExpand()" class="w-full mt-2 flex items-center justify-center gap-1 text-[11px] text-indigo-600 font-bold border border-indigo-100 rounded-xl py-2.5 bg-white active:bg-indigo-50 transition-colors">
-                  <span id="vip-expand-label">전체보기</span>
-                  <span id="vip-expand-icon">▾</span>
-                  <span class="text-gray-400 font-normal text-[10px]" id="vip-expand-count">· 55개</span>
-                </button>
-              </div>
-            </div>
 
-            <!-- ② 찜한 상품 -->
-            <div id="jjim-section" class="px-2 pb-4">
-              <div class="flex items-center px-1 pt-3 pb-1.5">
-                <span class="text-[11px] font-black text-gray-900">찜한 상품</span>
-                <span class="text-gray-400 font-bold text-[9px] ml-1">· 4개</span>
-                <button onclick="scrollToVipSection()" class="ml-auto text-[9px] text-orange-600 font-bold bg-orange-50 border border-orange-200 rounded-full px-2 py-0.5 flex items-center gap-0.5 active:bg-orange-100 transition-colors">
-                  ↑ VIP 상품
-                </button>
-              </div>
-              <div class="grid grid-cols-2 gap-1.5">
-                <div class="jjim-card">
-                  <div class="relative">
+                <!-- 찜 카드 1 -->
+                <div class="rounded-xl overflow-hidden border border-gray-100 bg-white" data-type="jjim">
+                  <div class="relative bg-red-50 h-[64px] flex items-center justify-center text-2xl">
                     <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
-                    <div class="bg-red-50 h-[64px] flex items-center justify-center text-2xl">🥩</div>
+                    🥩
                   </div>
                   <div class="p-2">
                     <div class="text-[8px] text-gray-600 leading-tight mb-0.5">냉동 삼겹살 300g×3</div>
@@ -283,10 +266,12 @@
                     <div class="text-[8px] text-gray-400 mt-0.5">100g당 317원</div>
                   </div>
                 </div>
-                <div class="jjim-card">
-                  <div class="relative">
+
+                <!-- 찜 카드 2 -->
+                <div class="rounded-xl overflow-hidden border border-gray-100 bg-white" data-type="jjim">
+                  <div class="relative bg-amber-50 h-[64px] flex items-center justify-center text-2xl">
                     <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
-                    <div class="bg-amber-50 h-[64px] flex items-center justify-center text-2xl">🥢</div>
+                    🥢
                   </div>
                   <div class="p-2">
                     <div class="text-[8px] text-gray-600 leading-tight mb-0.5">샘표 진간장 1.8L</div>
@@ -297,10 +282,12 @@
                     <div class="text-[8px] text-gray-400 mt-0.5 line-through">10,500원</div>
                   </div>
                 </div>
-                <div class="jjim-card">
-                  <div class="relative">
+
+                <!-- 찜 카드 3 -->
+                <div class="rounded-xl overflow-hidden border border-gray-100 bg-white" data-type="jjim">
+                  <div class="relative bg-green-50 h-[64px] flex items-center justify-center text-2xl">
                     <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
-                    <div class="bg-green-50 h-[64px] flex items-center justify-center text-2xl">🥬</div>
+                    🥬
                   </div>
                   <div class="p-2">
                     <div class="text-[8px] text-gray-600 leading-tight mb-0.5">절임배추 20kg</div>
@@ -308,10 +295,12 @@
                     <div class="text-[8px] text-gray-400 mt-0.5">신선 당일 출발</div>
                   </div>
                 </div>
-                <div class="jjim-card">
-                  <div class="relative">
+
+                <!-- 찜 카드 4 -->
+                <div class="rounded-xl overflow-hidden border border-gray-100 bg-white" data-type="jjim">
+                  <div class="relative bg-orange-50 h-[64px] flex items-center justify-center text-2xl">
                     <input type="checkbox" class="absolute top-1.5 left-1.5 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] z-10">
-                    <div class="bg-orange-50 h-[64px] flex items-center justify-center text-2xl">🧅</div>
+                    🧅
                   </div>
                   <div class="p-2">
                     <div class="text-[8px] text-gray-600 leading-tight mb-0.5">백양파 20kg</div>
@@ -319,6 +308,7 @@
                     <div class="text-[8px] text-gray-400 mt-0.5">산지 직배송</div>
                   </div>
                 </div>
+
               </div>
             </div>
 
@@ -545,20 +535,17 @@
 </div>
 
 <script>
-  // ── 섹션 스크롤 ──────────────────────────
-  function scrollToVipSection() {
-    const container = document.getElementById('vip-scroll');
-    const target    = document.getElementById('vip-section');
-    if (!container || !target) return;
-    const diff = target.getBoundingClientRect().top - container.getBoundingClientRect().top;
-    container.scrollBy({ top: diff - 8, behavior: 'smooth' });
-  }
-  function scrollToJjimSection() {
-    const container = document.getElementById('vip-scroll');
-    const target    = document.getElementById('jjim-section');
-    if (!container || !target) return;
-    const diff = target.getBoundingClientRect().top - container.getBoundingClientRect().top;
-    container.scrollBy({ top: diff - 8, behavior: 'smooth' });
+  // ── 필터 ────────────────────────────────
+  function filterList(type) {
+    document.querySelectorAll('#unified-grid [data-type]').forEach(card => {
+      card.style.display = (type === 'all' || card.dataset.type === type) ? '' : 'none';
+    });
+    const ON  = 'text-[10px] font-bold rounded-full px-3 py-1 transition-colors bg-[#3B1FA5] text-white';
+    const OFF = 'text-[10px] font-bold rounded-full px-3 py-1 transition-colors bg-white text-gray-500 border border-gray-200';
+    ['all','vip','jjim'].forEach(t => {
+      const btn = document.getElementById('flt-' + t);
+      if (btn) btn.className = t === type ? ON : OFF;
+    });
   }
 
   // ── 탭 전환 ──────────────────────────────
@@ -579,67 +566,6 @@
     document.getElementById('norm-scroll').scrollTop = 0;
   }
 
-  // ── VIP 전체보기 (30개 시뮬레이션) ──────────
-  const VIP_EXTRA = [
-    { e:'🥩', n:'냉동 삼겹살 1kg',      p:'22,000원', o:'26,000원', d:'15%' },
-    { e:'🫒', n:'올리브유 500ml',        p:'12,500원', o:'14,000원', d:'11%' },
-    { e:'🧅', n:'백양파 20kg',           p:'32,000원', o:'37,000원', d:'13%' },
-    { e:'🍗', n:'닭가슴살 2kg',          p:'18,500원', o:'21,000원', d:'12%' },
-    { e:'🧄', n:'다진마늘 1kg',          p:'7,200원',  o:'8,500원',  d:'15%' },
-    { e:'🥛', n:'서울우유 1L×4입',       p:'9,800원',  o:'11,200원', d:'13%' },
-    { e:'🍜', n:'신라면 멀티팩 20개',    p:'18,900원', o:'22,000원', d:'14%' },
-    { e:'🫙', n:'해찬들 쌈장 2.8kg',     p:'14,500원', o:'16,800원', d:'14%' },
-    { e:'🐟', n:'고등어 순살 500g×3',    p:'21,000원', o:'24,000원', d:'13%' },
-    { e:'🧻', n:'두루마리 화장지 30롤',  p:'16,200원', o:'19,000원', d:'15%' },
-    { e:'🍋', n:'레몬 1kg (수입)',        p:'8,400원',  o:'9,800원',  d:'14%' },
-    { e:'🥜', n:'볶음 땅콩 1kg',         p:'11,500원', o:'13,500원', d:'15%' },
-    { e:'🧂', n:'천일염 3kg',            p:'6,800원',  o:'7,900원',  d:'14%' },
-    { e:'🍅', n:'방울토마토 2kg',        p:'13,200원', o:'15,500원', d:'15%' },
-    { e:'🥦', n:'브로콜리 500g×3',       p:'9,500원',  o:'11,000원', d:'14%' },
-    { e:'🧈', n:'버터 450g (무염)',       p:'8,900원',  o:'10,500원', d:'15%' },
-    { e:'🍄', n:'새송이버섯 2kg',        p:'11,800원', o:'13,800원', d:'14%' },
-    { e:'🐓', n:'국내산 닭볶음탕용 1kg', p:'9,200원',  o:'10,800원', d:'15%' },
-    { e:'🧆', n:'두부 300g×5입',         p:'7,500원',  o:'8,800원',  d:'15%' },
-    { e:'🌽', n:'냉동 스위트콘 1kg',     p:'5,900원',  o:'6,900원',  d:'14%' },
-    { e:'🫚', n:'포도씨유 1.8L',         p:'10,200원', o:'11,900원', d:'14%' },
-    { e:'🥗', n:'어린잎채소 200g×3',     p:'8,100원',  o:'9,500원',  d:'15%' },
-    { e:'🦐', n:'냉동 새우 500g',        p:'14,800원', o:'17,500원', d:'15%' },
-    { e:'🧇', n:'냉동 와플 12입',        p:'7,600원',  o:'8,900원',  d:'15%' },
-    { e:'🥫', n:'참치캔 150g×10입',      p:'19,500원', o:'22,800원', d:'14%' },
-    { e:'🍯', n:'국산 아카시아꿀 1kg',   p:'28,000원', o:'33,000원', d:'15%' },
-    { e:'🫘', n:'검은콩 1kg',            p:'9,800원',  o:'11,500원', d:'15%' },
-    { e:'🍞', n:'식빵 720g (저당)',       p:'5,400원',  o:'6,300원',  d:'14%' },
-    { e:'🥚', n:'메추리알 30입',         p:'4,800원',  o:'5,600원',  d:'14%' },
-    { e:'🧃', n:'제주 감귤주스 1L×6',    p:'16,500원', o:'19,200원', d:'14%' },
-  ];
-
-  document.addEventListener('DOMContentLoaded', function() {
-    const grid = document.getElementById('vip-extra-grid');
-    if (!grid) return;
-    grid.innerHTML = VIP_EXTRA.map(c => `
-      <div class="vip-card">
-        <div class="relative bg-white rounded-lg h-12 flex items-center justify-center text-xl mb-1.5">
-          <input type="checkbox" class="absolute top-1 left-1 w-3.5 h-3.5 cursor-pointer accent-[#3B1FA5] rounded z-10">${c.e}
-        </div>
-        <div class="text-[8px] leading-tight text-gray-700 mb-1.5">${c.n}</div>
-        <div class="flex items-center gap-1 flex-wrap">
-          <span class="bg-orange-500 text-white text-[7px] px-1 py-0.5 rounded font-black">VIP</span>
-          <span class="text-red-500 text-[9px] font-black">${c.d}</span>
-          <span class="text-[10px] font-black text-orange-700">${c.p}</span>
-        </div>
-        <div class="text-[8px] text-gray-400 line-through mt-0.5">${c.o}</div>
-      </div>`).join('');
-  });
-
-  let vipExpanded = false;
-  function toggleVipExpand() {
-    vipExpanded = !vipExpanded;
-    document.getElementById('vip-extra-grid').classList.toggle('hidden', !vipExpanded);
-    document.getElementById('vip-expand-label').textContent = vipExpanded ? '접기' : '전체보기';
-    document.getElementById('vip-expand-icon').textContent  = vipExpanded ? '▴' : '▾';
-    document.getElementById('vip-expand-count').textContent = vipExpanded ? '' : '· 55개';
-    document.getElementById('vip-count-label').textContent  = vipExpanded ? '· 32개' : '· 2개';
-  }
 </script>
 </body>
 </html>
