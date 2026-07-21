@@ -298,4 +298,132 @@
         <div class="st"><div><b>저장 확인</b><span>확인 다이얼로그 후 저장 → 목록 갱신</span></div></div>
       </div>
       <div class="tips"><div class="tt">💡 여러 건을 한 번에 수정하려면 — [일괄수정] 모드</div><ul>
-        <li>상품 목록 상단 [일괄수정] 클릭 → 목록에
+        <li>상품 목록 상단 [일괄수정] 클릭 → 목록에서 <b>고객별고정가·기타</b>만 직접 입력 가능, 변경된 행은 구분 표시</li>
+        <li>[저장]은 <b>현재 페이지의 변경 건만</b> 저장됩니다 — 다른 페이지는 별도 저장 필요</li>
+        <li>변경사항이 있는 채로 페이지 이동 시 확인 다이얼로그: <span class="msg">"N건의 변경사항이 저장되지 않습니다. 이동하시겠습니까?"</span></li>
+      </ul></div>
+    </div>
+
+    <!-- 상품별 일괄수정 -->
+    <div class="task-panel">
+      <div class="path">상품별고정가 관리 탭 → [일괄수정]</div>
+      <div class="steps">
+        <div class="st"><div><b>상품 기준 조회</b><span>상품ID·상품ERP코드·상품명으로 검색 — 특정 상품이 <b>어느 고객에게 어떤 가격</b>으로 걸려있는지 한눈에 확인 (상호·회원번호 컬럼 표시)</span></div></div>
+        <div class="st"><div><b>일괄수정 모드 진입</b><span>목록 상단 [일괄수정] 클릭 → <b>고객별고정가·기타</b> 필드가 입력 가능 상태로 전환, 변경 행 구분 표시</span></div></div>
+        <div class="st"><div><b>값 입력</b><span>유효성은 단건 수정과 동일 — 0 초과 정수, 정가·판매가 이하 (입력 즉시 검사)</span></div></div>
+        <div class="st"><div><b>저장</b><span><b>현재 페이지의 변경 건만</b> 저장 후 일괄수정 모드 해제<br><span class="msg">"N건 고객별고정가가 일괄 수정되었습니다."</span></span></div></div>
+      </div>
+      <div class="tips"><div class="tt">⚠️ 주의</div><ul>
+        <li>페이지당 25건 표시 — 여러 페이지에 걸친 수정은 페이지마다 저장해야 합니다</li>
+        <li>변경사항이 있는 채로 페이지 이동 시 미저장 확인 다이얼로그가 뜹니다 (확인 시 변경사항 유실)</li>
+        <li>동일 상품이라도 고정가는 <b>고객별로 각각</b> 관리됩니다 — 행 단위로 입력하세요</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- 7. 요약 -->
+  <section class="slide">
+    <div class="kicker">Summary</div>
+    <h2>핵심 요약</h2>
+    <p class="desc">이것만 기억하세요.</p>
+    <div class="callout co-green">
+      <div class="t">1️⃣ 적용기간 이내 + 사용여부 Y 여야 적용됩니다</div>
+      <p>둘 중 하나라도 어긋나면 기존 가격 로직(타임세일·캠페인·정가)으로 노출됩니다.</p>
+    </div>
+    <div class="callout co-blue">
+      <div class="t">2️⃣ 할인가가 더 싸도 고정가, 정가가 더 싸면 정가</div>
+      <p>타임세일·캠페인 할인가가 고정가보다 낮아도 고정가를 노출하고, 정가가 고정가보다 낮아지면 정가를 노출합니다.</p>
+    </div>
+    <div class="callout co-red">
+      <div class="t">3️⃣ 탈퇴고객은 고객목록에서 조회되지 않습니다</div>
+      <p>목록에 없는 고객은 탈퇴 여부부터 확인하세요.</p>
+    </div>
+    <div class="card" style="margin-top:8px;">
+      <h3>🔗 참고 문서</h3>
+      <p>BO 기획서(Confluence) · 유저스토리 · 정책 문서는 프로젝트 최상위 페이지에서 확인할 수 있습니다.<br>문의: 플랫폼팀 PM</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="keyhint">← → 방향키로 이동</div>
+<div class="nav">
+  <button class="nav-btn" id="prevBtn">← 이전</button>
+  <div class="dots" id="dots"></div>
+  <div style="display:flex; align-items:center; gap:16px;">
+    <span class="page-ind" id="pageInd"></span>
+    <button class="nav-btn" id="nextBtn">다음 →</button>
+  </div>
+</div>
+
+<script>
+const slides=[...document.querySelectorAll('.slide')];
+let cur=0;
+const dotsEl=document.getElementById('dots');
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' on':'');d.addEventListener('click',()=>go(i));dotsEl.appendChild(d);});
+function go(i){
+  if(i<0||i>=slides.length)return;
+  slides[cur].classList.remove('active');
+  cur=i;
+  slides[cur].classList.add('active');
+  slides[cur].scrollTop=0;
+  document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('on',j===cur));
+  document.getElementById('prevBtn').disabled=cur===0;
+  document.getElementById('nextBtn').disabled=cur===slides.length-1;
+  document.getElementById('pageInd').textContent=(cur+1)+' / '+slides.length;
+}
+document.getElementById('startBtn').addEventListener('click',()=>go(1));
+document.getElementById('prevBtn').addEventListener('click',()=>go(cur-1));
+document.getElementById('nextBtn').addEventListener('click',()=>go(cur+1));
+go(0);
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' ')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='PageUp')go(cur-1);
+});
+
+/* 조건 시뮬레이터 */
+const cond={period:true,use:true};
+function toggleCond(k){
+  cond[k]=!cond[k];
+  document.getElementById(k==='period'?'swPeriod':'swUse').classList.toggle('on',cond[k]);
+  document.getElementById('lblPeriod').textContent=cond.period?'O':'X';
+  document.getElementById('lblUse').textContent=cond.use?'Y':'N';
+  const r=document.getElementById('condResult');
+  if(cond.period&&cond.use){
+    r.innerHTML='<span class="sim-label" style="background:#d1fae5;color:#047857;">고정가 적용</span><span class="sim-note">두 조건 모두 충족 — 고객에게 고정가가 노출·적용됩니다.</span>';
+  }else{
+    const why=!cond.period&&!cond.use?'적용기간 외 + 사용여부 N':(!cond.period?'적용기간을 벗어남':'사용여부 N(Off)');
+    r.innerHTML='<span class="sim-label" style="background:#fee2e2;color:#b91c1c;">적용 안 됨</span><span class="sim-note">'+why+' — 기존 가격 로직(타임세일·캠페인·정가)으로 폴백됩니다.</span>';
+  }
+}
+document.getElementById('swPeriod').addEventListener('click',()=>toggleCond('period'));
+document.getElementById('swUse').addEventListener('click',()=>toggleCond('use'));
+
+/* 가격 시뮬레이터 */
+const cases=[
+  {price:'8,000원',tag:'고정가 노출',tc:'#dbeafe',cc:'#1d4ed8',note:'타임세일가(6,500원)가 고정가보다 낮아도 고정가 8,000원을 노출합니다.'},
+  {price:'8,000원',tag:'고정가 노출',tc:'#dbeafe',cc:'#1d4ed8',note:'캠페인 할인가(7,000원)가 고정가보다 낮아도 고정가 8,000원을 노출합니다.'},
+  {price:'8,000원',tag:'고정가 노출',tc:'#dbeafe',cc:'#1d4ed8',note:'할인이 없어도 정가(10,000원)가 아닌 고정가 8,000원을 노출합니다.'},
+  {price:'7,500원',tag:'정가 노출 (예외)',tc:'#fef3c7',cc:'#b45309',note:'정가(7,500원)가 고정가(8,000원)보다 낮아진 경우 — 정가를 노출합니다.'}
+];
+function simCase(i,btn){
+  document.querySelectorAll('.sim-btns .sim-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  const c=cases[i];
+  document.getElementById('simPrice').textContent=c.price;
+  const t=document.getElementById('simTag');
+  t.textContent=c.tag; t.style.background=c.tc; t.style.color=c.cc;
+  document.getElementById('simNote').textContent=c.note;
+}
+document.querySelectorAll('.sim-btns .sim-btn').forEach((b,i)=>b.addEventListener('click',()=>simCase(i,b)));
+
+/* 작업별 가이드 탭 */
+function taskTab(i,btn){
+  document.querySelectorAll('.task-tab').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.task-panel').forEach((p,j)=>p.classList.toggle('on',j===i));
+}
+document.querySelectorAll('.task-tab').forEach((b,i)=>b.addEventListener('click',()=>taskTab(i,b)));
+</script>
+</body>
+</html>
